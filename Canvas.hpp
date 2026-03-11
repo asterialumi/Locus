@@ -137,8 +137,8 @@ namespace lumi {
             return data[index];
         }
 
-        T* first()          { return operator[](0); }
-        T* last()           { return operator[](_size-1); }
+        T first()          { return operator[](0); }
+        T last()           { return operator[](_size-1); }
         size_t size()        { return _size; }
         size_t capacity()    { return _capacity; }
         log_t allocations()  { return _allocations; }
@@ -161,7 +161,7 @@ namespace lumi {
                 std::cout << data[i];
                 if(i+1 < _size) std::cout << ",";
             }
-            std::cout << "]";
+            std::cout << "]" << std::endl;
 
         }
 
@@ -191,7 +191,7 @@ namespace lumi {
             data = allocate(data, _capacity);
             
             //DEBUG
-            std::cout << "grow:" << _size << "/" << _capacity << std::endl;
+            //std::cout << "grow:" << _size << "/" << _capacity << std::endl;
         }
 
         T* allocate(T* origin, size_t memory) {
