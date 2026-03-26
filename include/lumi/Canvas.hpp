@@ -196,7 +196,7 @@ namespace lumi {
 
         T* allocate(T* origin, size_t memory) {
             T* buffer = static_cast<T*>(::operator new(memory * sizeof(T)));
-
+            
             for(size_t i = 0; i < _size; i++) {
                 new (&buffer[i]) T(std::move(origin[i]));
                 origin[i].~T();
