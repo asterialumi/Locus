@@ -1,34 +1,44 @@
-# CanvasDT
-Four fundamentals of data structures exist: a **List** (array or linked list), a **Tree**, a **Graph**, and a **Map**. But what if we wanted to model just one data structure that can be shaped to any of these four?
+# Locus
+Some of the fundamental data structures are: a **List** (array or linked list), a **Tree**, a **Graph**, and a **Map**. But what if we wanted to model just one data structure that can be shaped to any of these, and possibly more? What if you had one array that has the best possible quality-of-life functions, and it acts as a storage to any other specialized structures you need for your project? Hey, that screams like **Data-Oriented Design**! (I JUST learned about this btw)
 
-Introducing **Canvas**, a data structure / data type I designed that is cursor-based, which works similarly to c++'s `std::vector`, but with features I designed for more freedom and separation of responsibility. It's designed to be as semantic as possible, and working with it feels like you're actually working with a Canvas. Idk maybe the name will change, but for now I'm still working with it. Here are some of it's features:
+Introducing **Locus**, a data structure / data type I designed that is cursor-based, which works similarly to c++'s `std::vector`, but with features I designed for more freedom and separation of responsibility. (Previously named as: **Canvas**)
 
-- Initialize as `Canvas<T>` and you've created yourself a simple **Array**. Initialize it as `Canvas<K,V>` and you now have a **Map**. Set `V` as another `Canvas<T>` and you can use it as an n-ary **Tree** or an unweighted **Graph**.
-- Uses `struct Cursor`, which works similary to iterators in c++, except most functions in Canvas returns a Cursor by default, so you can do **Cursor Chaining**. Examples:
+It's not only a vector, but a universal storage you can use for any other stuctures you might use it for. It's designed to be as semantic as possible, and EVERY function is one word. It's purpose is also heavily influenced for game development, since Locus is essentially an **Array-based implementation** of data structures without using pointers (i.e. it's cache friendly :D).
+
+Here are some of it's features:
+
+- Initialize as `Locus<T>` and you've created yourself a simple **Array**. If you want a Tree or any other data structure, you can initialize it by using the `view()` function!
+```cpp
+    lumi::Locus<char> example(10, 'A');
+
+    auto tree = example.view<lumi::Tree>(); //returns a Tree "Aspect" of type char (automatic, since your 'example' locus is of type char already)
+    tree.display();
+```
+- Uses `struct Point<T>`, which works similary to iterators in c++, except most functions in Locus returns a Point by default, so you can do **Cursor Chaining**. Examples:
  ```cpp
-    Canvas<int> canvas;
+    using namespace lumi;
+    Locus<int> locus;
 
-    auto cursor = canvas.position(4);
-    for(int i = 0; i < 5; i++) cursor.insert(i+1);
-    canvas.position(5).insert(10);
+    auto cursor = locus.at(4); //you are free to point at an invalid index
+    for(int i = 0; i < 5; i++) cursor.insert(i+1); //automatically creates default ints (0) before index 4
+    locus.at(5).insert(10);
 
-    Canvas<Person> people;
-    people.build("Asteria", 20).move(2);
+    Locus<Person> people;
+    people.build("Asteria", 20).move(2); //move() is still unimplemented
 ```
 
-- Under the hood, it's really all just an array because it's the best data structure uwu *(but seriously, a data structure that is contiguous in memory and doesn't use pointers is immaculate)*, therefore it's an **Array-based implementation** of the other data structures.
-- Need a range of Cursors? Use `struct Range`!
-    - ex. `canvas.hold(canvas.begin(), canvas.end()).remove(5);`
-    - *this removes elements that are equal to 5 within the range canvas[0] to canvas[size-1], which are `canvas.begin()` and `canvas.end()` respectively*
-- and many more... I'll care to update this later I'm tired
+- Need a range of Points? Use `struct Chain<T>`!
+    - ex. `locus.range(locus.begin(), locus.end()).remove(5);`
+    - *this removes elements that are equal to 5 within the range locus[0] to locus[size-1], which are `locus.begin()` and `locus.end()` respectively*
+- and many more... I'll care to update this once I get motivated.
 
 
 ### Not yet completed
-- `Canvas<K,V>` and `Canvas<>` (a mixed list variant) implementation
-- a way to enforce **LIFO**, **FIFO**, **minHeap** and **maxHeap** behavior
-- a proper, universal `void display()` that matches the actual structure of the Canvas
-- error handling
-- more code documentation
+- a LOT of data structures as `Aspects`, which are still unimplemented
+- a lot of design problems I have yet to solve, send help
+- error handling and more code documentation
 
 ### How to use
-I don't really know dawg, copy my code maybe? The main logic is in the `Canvas.hpp` file, and I use the `main.cpp` for testing the code. I guess you can download these and run it yourself. Have fun!
+For now, you can really just take a look and download the source code, which are the files inside the `include\lumi` folder. I use the `main.cpp` (and recently, `newmain.cpp`) for testing the code under `examples`. Keep in mind that some of these naming conventions might not have changed yet, since I recently renamed this project from **Canvas** to **Locus** to better represent my new design, as well as to avoid further naming collisions.
+
+Anyways, just include the header "Locus.hpp" and you should be good to go. Have fun experimenting!
