@@ -4,10 +4,51 @@ namespace lumi {
     template<typename T> class Locus;
 
     template<typename T>
-    class Tree {
+    class List {
+    public:
+        
+    private:
         Locus<T>& source;
-
+        
     };
+
+    template<typename T>
+    class Tree {
+    public:
+        
+    private:
+        Locus<T>& source;
+        
+    };
+
+    template<typename T>
+    class Graph {
+    public:
+        
+    private:
+        Locus<T>& source;
+        
+    };
+
+    template<typename T>
+    class Map {
+    public:
+        
+    private:
+        Locus<T>& source;
+        
+    };
+
+    template<typename T>
+    class Set {
+    public:
+        
+    private:
+        Locus<T>& source;
+        
+    };
+
+
     //ListView();
     //TreeView();
     //GraphView();
