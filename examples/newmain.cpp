@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Canvas.hpp"
+#include "../include/lumi/Locus.hpp"
 using namespace lumi;
 
 void space() {
@@ -7,48 +7,48 @@ void space() {
 }
 
 int main() {
-    Canvas<int> canvas;
+    Locus<int> locus;
     
     std::cout << "INSERT W/ CURSOR: " << std::endl;
-    canvas.insert(10);
-    canvas.position(0).insert(5);
-    canvas.display();
+    locus.insert(10);
+    locus.at(0).insert(5);
+    locus.display();
 
     space();
 
     std::cout << "GET: " << std::endl;
-    std::cout << "canvas[0] = " << canvas[0] << std::endl;
-    std::cout << "also canvas[0] = " << canvas.first() << std::endl;
+    std::cout << "canvas[0] = " << locus[0] << std::endl;
+    std::cout << "also canvas[0] = " << locus.first() << std::endl;
     
     space();
 
     std::cout << "RESERVE: " << std::endl;
-    canvas.reserve(8);
-    canvas.display();
+    locus.reserve(8);
+    locus.display();
 
     space();
 
     std::cout << "INSERT W/ RANGE: " << std::endl;
-    canvas.hold(canvas.begin(), canvas.position(5)).insert(2);
-    canvas.display();
+    locus.range(locus.begin(), locus.at(5)).insert(2);
+    locus.display();
 
     space();
 
     std::cout << "ERASE W/ CURSOR: " << std::endl;
-    canvas.erase(5);
-    canvas.end().erase();
-    canvas.display();
+    locus.erase(5);
+    locus.end().erase();
+    locus.display();
 
     space();
     
     std::cout << "ERASE W/ RANGE: " << std::endl;
-    canvas.hold(canvas.position(2), canvas.end()).erase(2);
-    canvas.display();
+    locus.range(locus.at(2), locus.end()).erase(2);
+    locus.display();
 
     space();
 
     std::cout << "CLEAR: " << std::endl;
-    canvas.clear();
-    canvas.display();
+    locus.clear();
+    locus.display();
     return 0;
 }
